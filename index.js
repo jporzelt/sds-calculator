@@ -1,4 +1,4 @@
-// Interaktion für die hellblaue statische SDS-Seite: Klicks auf Ja/Nein summieren und Score anzeigen
+// Interaktion für die statische SDS-Seite: Klicks auf Ja/Nein summieren und Score anzeigen
 (function () {
   const rows = Array.from(document.querySelectorAll('.checklist .row'));
   const scoreEl = document.getElementById('scoreNumber');
@@ -7,7 +7,7 @@
   const state = new Map();
 
   function calcScore() {
-    // Sonderlogik: Frage 0 entscheidet, ob berechnet wird oder direkt 5 gesetzt wird.
+    // Sonderlogik: Frage 0 entscheidet, ob berechnet wird oder direkt 1 gesetzt wird.
     const row0 = document.querySelector('.checklist .row[data-q="0"]');
     const yes0 = row0 ? row0.querySelector('.value.yes') : null;
     const no0 = row0 ? row0.querySelector('.value.no') : null;
@@ -34,7 +34,6 @@
     // Berechnung nur wenn Frage 0 mit Ja beantwortet (oder noch nicht beantwortet)
     let sum = 0;
     for (const row of rows) {
-      if (row.dataset.q === '0') continue; // F0 trägt 0 bei
       const sel = row.querySelector('.value.selected');
       if (!sel) continue;
       const v = Number(sel.getAttribute('data-value'));
